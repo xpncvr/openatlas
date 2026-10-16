@@ -53,7 +53,7 @@ public class GuiWaypointList extends Screen {
         }).bounds(cx + 78, 24, 82, 20).build());
         addRenderableWidget(Button.builder(Component.literal("New"), b -> {
             BlockPos p = minecraft.player != null ? minecraft.player.blockPosition() : BlockPos.ZERO;
-            minecraft.setScreen(new GuiWaypointEdit(this, null, p.getX(), p.getY(), p.getZ(), MapSession.dimension()));
+            minecraft.gui.setScreen(new GuiWaypointEdit(this, null, p.getX(), p.getY(), p.getZ(), MapSession.dimension()));
         }).bounds(cx - 160, height - 28, 100, 20).build());
         addRenderableWidget(Button.builder(Component.literal("Done"), b -> onClose())
                 .bounds(cx + 60, height - 28, 100, 20).build());
@@ -175,7 +175,7 @@ public class GuiWaypointList extends Screen {
 
     private void action(String a, Waypoint w) {
         switch (a) {
-            case "Edit" -> minecraft.setScreen(new GuiWaypointEdit(this, w, 0, 0, 0, w.dimension));
+            case "Edit" -> minecraft.gui.setScreen(new GuiWaypointEdit(this, w, 0, 0, 0, w.dimension));
             case "TP" -> {
                 Teleport.to(w.dimension, w.x, Integer.toString(w.y), w.z);
                 onClose();
@@ -202,7 +202,7 @@ public class GuiWaypointList extends Screen {
 
     @Override
     public void onClose() {
-        minecraft.setScreen(parent);
+        minecraft.gui.setScreen(parent);
     }
 
     @Override

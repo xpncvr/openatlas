@@ -17,7 +17,7 @@ public final class Toast {
         text = message;
         until = System.currentTimeMillis() + DURATION_MILLIS;
         Minecraft mc = Minecraft.getInstance();
-        if (!(mc.screen instanceof GuiWorldMap) && mc.player != null) mc.player.sendOverlayMessage(Component.literal(message));
+        if (!(mc.gui.screen() instanceof GuiWorldMap) && mc.player != null) mc.player.sendOverlayMessage(Component.literal(message));
     }
 
     public static void render(GuiGraphicsExtractor g, Font font, int centerX, int y) {

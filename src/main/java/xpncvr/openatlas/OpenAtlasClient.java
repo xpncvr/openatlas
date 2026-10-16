@@ -65,7 +65,7 @@ public class OpenAtlasClient implements ClientModInitializer {
                 ChunkPipeline.onCaveChange(level, player.chunkPosition(), CaveTracker.update(level, player));
             }
             ChunkPipeline.tick();
-            if (client.screen == null) prompt(client);
+            if (client.gui.screen() == null) prompt(client);
         }
         if (tick % FLUSH_TICKS == 0) DiskCache.INSTANCE.submit(MapCache.INSTANCE::flushDirty);
         handleKeys(client, player);
@@ -74,33 +74,33 @@ public class OpenAtlasClient implements ClientModInitializer {
     private static void prompt(Minecraft client) {
         MapSession.CarryOver carry = MapSession.takeCarryOver();
         if (carry != null) {
-            client.setScreen(new ConfirmScreen(accept -> {
+            client.gui.setScreen(new ConfirmScreen(accept -> {
                 MapSession.answerCarryOver(carry, accept);
-                client.setScreen(null);
+                client.gui.setScreen(null);
             }, Component.translatable("openatlas.seed.title"), Component.translatable("openatlas.seed.message")));
             return;
         }
         String source = MapSession.takeImportCandidate();
         if (source == null) return;
-        client.setScreen(new ConfirmScreen(accept -> {
+        client.gui.setScreen(new ConfirmScreen(accept -> {
             MapSession.answerImport(source, accept);
-            client.setScreen(null);
+            client.gui.setScreen(null);
         }, Component.translatable("openatlas.import.title"),
                 Component.translatable("openatlas.import.message", WorldIndex.serverOf(source))));
     }
 
     private static void handleKeys(Minecraft client, LocalPlayer player) {
         while (mapKey.consumeClick()) {
-            if (client.level != null) client.setScreen(new GuiWorldMap());
+            if (client.level != null) client.gui.setScreen(new GuiWorldMap());
         }
         while (waypointKey.consumeClick()) {
             if (player != null) {
                 BlockPos p = player.blockPosition();
-                client.setScreen(new GuiWaypointEdit(null, null, p.getX(), p.getY(), p.getZ(), MapSession.dimension()));
+                client.gui.setScreen(new GuiWaypointEdit(null, null, p.getX(), p.getY(), p.getZ(), MapSession.dimension()));
             }
         }
         while (waypointListKey.consumeClick()) {
-            if (client.level != null) client.setScreen(new GuiWaypointList(null));
+            if (client.level != null) client.gui.setScreen(new GuiWaypointList(null));
         }
     }
 

@@ -98,7 +98,7 @@ public class GuiSettings extends Screen {
     @Override
     public void onClose() {
         Settings.save();
-        minecraft.setScreen(parent);
+        minecraft.gui.setScreen(parent);
     }
 
     @Override

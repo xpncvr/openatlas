@@ -24,7 +24,7 @@ public final class WaypointHud {
     public static void extract(GuiGraphicsExtractor g, DeltaTracker delta) {
         Minecraft mc = Minecraft.getInstance();
         Settings cfg = Settings.INSTANCE;
-        if (!cfg.showWorldWaypoints || camPos == null || mc.level == null || mc.player == null || mc.options.hideGui) return;
+        if (!cfg.showWorldWaypoints || camPos == null || mc.level == null || mc.player == null || mc.gui.hud.isHidden()) return;
 
         int w = g.guiWidth(), h = g.guiHeight();
         String dim = MapSession.dimension();

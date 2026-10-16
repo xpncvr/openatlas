@@ -92,9 +92,9 @@ public class GuiWorldMap extends Screen {
         addRenderableWidget(Button.builder(Component.literal(">"), b -> stepLayer(1)).bounds(right - 16, 22, 16, 16).build());
 
         int bottom = height - 20;
-        addRenderableWidget(Button.builder(Component.literal("Waypoints"), b -> minecraft.setScreen(new GuiWaypointList(this)))
+        addRenderableWidget(Button.builder(Component.literal("Waypoints"), b -> minecraft.gui.setScreen(new GuiWaypointList(this)))
                 .bounds(right - 196, bottom, 64, 16).build());
-        addRenderableWidget(Button.builder(Component.literal("Settings"), b -> minecraft.setScreen(new GuiSettings(this)))
+        addRenderableWidget(Button.builder(Component.literal("Settings"), b -> minecraft.gui.setScreen(new GuiSettings(this)))
                 .bounds(right - 130, bottom, 64, 16).build());
         addRenderableWidget(Button.builder(Component.literal("Export"), b -> {
             Toast.show("Exporting...");
@@ -467,7 +467,7 @@ public class GuiWorldMap extends Screen {
         }
         Waypoint wp = hovered;
         if (wp != null) {
-            items.add(new MenuItem("Edit " + wp.name, () -> minecraft.setScreen(new GuiWaypointEdit(this, wp, 0, 0, 0, wp.dimension))));
+            items.add(new MenuItem("Edit " + wp.name, () -> minecraft.gui.setScreen(new GuiWaypointEdit(this, wp, 0, 0, 0, wp.dimension))));
             items.add(new MenuItem("Teleport", () -> teleport(wp.dimension, wp.x, Integer.toString(wp.y), wp.z)));
             items.add(new MenuItem("Copy coordinates", () -> copyCoords(wp.x + " " + wp.y + " " + wp.z)));
             items.add(new MenuItem("Hide", () -> {
@@ -481,7 +481,7 @@ public class GuiWorldMap extends Screen {
         } else {
             String standY = by != null ? Integer.toString(by + 1) : "~";
             int newY = by != null ? by + 1 : minecraft.player != null ? Mth.floor(minecraft.player.getY()) : 64;
-            items.add(new MenuItem("Create waypoint here", () -> minecraft.setScreen(new GuiWaypointEdit(this, null, bx, newY, bz, viewDim))));
+            items.add(new MenuItem("Create waypoint here", () -> minecraft.gui.setScreen(new GuiWaypointEdit(this, null, bx, newY, bz, viewDim))));
             items.add(new MenuItem("Teleport here", () -> teleport(viewDim, bx, standY, bz)));
             items.add(new MenuItem("Copy coordinates", () -> copyCoords(bx + " " + standY + " " + bz)));
         }
