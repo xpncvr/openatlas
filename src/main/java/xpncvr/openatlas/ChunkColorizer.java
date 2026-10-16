@@ -170,7 +170,7 @@ public final class ChunkColorizer {
             Optional<Resource> resource = mc.getResourceManager().getResource(file);
             if (resource.isEmpty()) return mapColor(state);
             try (InputStream is = resource.get().open();
-                 NativeImage img = NativeImage.read(NativeImage.Format.RGBA, is)) {
+                 NativeImage img = NativeImage.read(is)) {
                 int avg = averageFirstFrame(img);
                 if (avg == 0) return mapColor(state);
                 SPRITE_COLORS.put(name, avg);

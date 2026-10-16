@@ -15,7 +15,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 
 public class OpenAtlasClient implements ClientModInitializer {
     private static final int FLUSH_TICKS = 600;
@@ -31,9 +31,9 @@ public class OpenAtlasClient implements ClientModInitializer {
         Settings.load();
 
         KeyMapping.Category category = KeyMapping.Category.register(Identifier.fromNamespaceAndPath(OpenAtlas.MOD_ID, "controls"));
-        mapKey = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.openatlas.open", GLFW.GLFW_KEY_M, category));
-        waypointKey = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.openatlas.waypoint", GLFW.GLFW_KEY_B, category));
-        waypointListKey = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.openatlas.waypoints", GLFW.GLFW_KEY_U, category));
+        mapKey = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.openatlas.open", InputConstants.KEY_M, category));
+        waypointKey = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.openatlas.waypoint", InputConstants.KEY_B, category));
+        waypointListKey = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.openatlas.waypoints", InputConstants.KEY_U, category));
 
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
             if (!MapSession.joined()) MapSession.join(handler, client);

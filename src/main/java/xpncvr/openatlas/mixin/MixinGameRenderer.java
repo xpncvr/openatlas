@@ -1,7 +1,6 @@
 package xpncvr.openatlas.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
@@ -17,15 +16,15 @@ import xpncvr.openatlas.WaypointHud;
 public class MixinGameRenderer {
 
     @Inject(method = "renderLevel", at = @At("HEAD"))
-    private void runMapUpdates(DeltaTracker deltaTracker, CallbackInfo ci) {
+    private void runMapUpdates(CallbackInfo ci) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level != null) ChunkPipeline.frame(mc.level);
     }
 
     @Inject(method = "renderLevel", at = @At(value = "INVOKE",
-            target = "Lcom/mojang/blaze3d/systems/RenderSystem;setProjectionMatrix(Lcom/mojang/blaze3d/buffers/GpuBufferSlice;Lcom/mojang/blaze3d/ProjectionType;)V",
+            target = "Lcom/mojang/blaze3d/systems/RenderSystem;setProjectionMatrix(Lcom/mojang/renderpearl/api/buffers/GpuBufferSlice;Lcom/mojang/blaze3d/ProjectionType;)V",
             ordinal = 0))
-    private void captureMatrices(DeltaTracker deltaTracker, CallbackInfo ci,
+    private void captureMatrices(CallbackInfo ci,
                                  @Local(ordinal = 0) Matrix4f projectionMatrix, @Local CameraRenderState cameraState) {
         WaypointHud.capture(projectionMatrix, cameraState.viewRotationMatrix, cameraState.pos);
     }

@@ -16,7 +16,7 @@ import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.levelgen.Heightmap;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 import org.lwjgl.system.MemoryUtil;
 
 import java.util.ArrayList;
@@ -530,16 +530,16 @@ public class GuiWorldMap extends Screen {
             return true;
         }
         if (super.mouseClicked(event, doubleClick)) return true;
-        if (event.button() == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
+        if (event.button() == InputConstants.MOUSE_BUTTON_RIGHT) {
             openMenu(mx, my);
             return true;
         }
-        return event.button() == GLFW.GLFW_MOUSE_BUTTON_LEFT;
+        return event.button() == InputConstants.MOUSE_BUTTON_LEFT;
     }
 
     @Override
     public boolean mouseDragged(MouseButtonEvent event, double dx, double dy) {
-        if (event.button() == GLFW.GLFW_MOUSE_BUTTON_LEFT && menu == null) {
+        if (event.button() == InputConstants.MOUSE_BUTTON_LEFT && menu == null) {
             cameraX -= dx / scale;
             cameraZ -= dy / scale;
             return true;
@@ -569,12 +569,12 @@ public class GuiWorldMap extends Screen {
             onClose();
             return true;
         }
-        if (event.key() == GLFW.GLFW_KEY_G) {
+        if (event.key() == InputConstants.KEY_G) {
             Settings.INSTANCE.showGrid = !Settings.INSTANCE.showGrid;
             Settings.save();
             return true;
         }
-        if (event.key() == GLFW.GLFW_KEY_SPACE && minecraft.player != null) {
+        if (event.key() == InputConstants.KEY_SPACE && minecraft.player != null) {
             viewDim = MapSession.dimension();
             fixedLayer = null;
             cameraX = minecraft.player.getX();

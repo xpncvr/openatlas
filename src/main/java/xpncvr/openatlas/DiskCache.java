@@ -101,7 +101,7 @@ public final class DiskCache {
         Path file = mipFile(level, key, rx, rz);
         if (Files.exists(file)) {
             try (InputStream is = Files.newInputStream(file);
-                 NativeImage img = NativeImage.read(NativeImage.Format.RGBA, is)) {
+                 NativeImage img = NativeImage.read(is)) {
                 if (img.getWidth() == level.size && img.getHeight() == level.size) return img.getPixelsABGR();
             } catch (IOException e) {
                 OpenAtlas.LOGGER.warn("Failed to load mip {} {},{}: {}", key, rx, rz, e.getMessage());
@@ -128,7 +128,7 @@ public final class DiskCache {
         if (!Files.exists(file)) return null;
         int[] px;
         try (InputStream is = Files.newInputStream(file);
-             NativeImage img = NativeImage.read(NativeImage.Format.RGBA, is)) {
+             NativeImage img = NativeImage.read(is)) {
             if (img.getWidth() != REGION_PX || img.getHeight() != REGION_PX) return null;
             px = img.getPixelsABGR();
         } catch (IOException e) {

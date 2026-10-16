@@ -4,7 +4,7 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.Util;
+import com.mojang.blaze3d.Blaze3D;
 
 import java.nio.file.Files;
 
@@ -63,7 +63,7 @@ public class GuiSettings extends Screen {
         } catch (Exception e) {
             OpenAtlas.LOGGER.warn("Failed to create {}: {}", Settings.BASE_DIR, e.getMessage());
         }
-        Util.getPlatform().openPath(Settings.BASE_DIR);
+        Blaze3D.openPath(Settings.BASE_DIR);
     }
 
     private void toggle(int x, int y, String name, Supplier<Boolean> get, Consumer<Boolean> set) {
