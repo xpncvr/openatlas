@@ -1,0 +1,12 @@
+{
+  "key.category.openatlas.controls": "OpenAtlas",
+  "key.openatlas.open": "Open world map",
+  "key.openatlas.waypoint": "New waypoint",
+  "key.openatlas.waypoints": "Waypoint list",
+  "openatlas.import.title": "Similar server detected",
+  "openatlas.import.message": "We noticed this server is similar to %s. Import its map and waypoints?",
+  "openatlas.import.done": "Imported map from %s",
+  "openatlas.seed.title": "World seed changed",
+  "openatlas.seed.message": "This looks like a different world on the same server. Copy the previous map into it?",
+  "openatlas.seed.copied": "Copied the previous map"
+}

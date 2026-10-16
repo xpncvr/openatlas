@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "xpncvr.openatlas.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "MixinClientPacketListener",
+    "MixinBlockUpdate",
+    "MixinGameRenderer",
+    "ClientWaypointManagerAccessor",
+    "Vec3iWaypointAccessor",
+    "ChunkWaypointAccessor",
+    "BiomeManagerAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
